@@ -10,17 +10,20 @@ const Navbar = () => {
   const { isAuthenticated, setIsAuthenticated } = useContext(Context);
 
   const handleLogout = async () => {
-    await axios
-      .post("http://localhost:5000/api/logout", {
+    try {
+      await axios.post("http://localhost:5000/api/logout", {
         withCredentials: true,
-      })
-      .then((res) => {
-        toast.success(res.data.message);
-        setIsAuthenticated(false);
-      })
-      .catch((err) => {
-        toast.error(err.response.data.message);
       });
+
+      toast.success("Logged out successfully");
+
+      localStorage.removeItem("token"); // ❌ Remove JWT token from storage
+      setIsAuthenticated(false); // 🔥 Update auth state
+
+      navigateTo("/login"); // 🚀 Redirect to login page
+    } catch (err) {
+      toast.error(err.response?.data?.message || "Logout failed");
+    }
   };
 
   const navigateTo = useNavigate();

@@ -1,0 +1,126 @@
+/* Orders.css */
+
+/* General Container Styling */
+.order-history-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 7rem auto;
+  background-color: #cdccf8; /* Muted background color */
+  border-radius: 8px;
+}
+
+.page-title {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 30px;
+  font-weight: bold;
+  color: #333; /* Muted dark color */
+}
+
+/* No Orders Found */
+.no-orders-message {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #777; /* Muted grey */
+}
+
+/* Loading */
+.loading {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #6cadf3;
+}
+
+.error-message {
+  text-align: center;
+  font-size: 1.2rem;
+  color: red;
+}
+
+/* Order Cards Container */
+.order-cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  justify-content: center;
+}
+
+/* Individual Order Card */
+.order-card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  transition: all 0.3s ease;
+  background-color: #f9fafb; /* Muted card background */
+  border: 1px solid #e0e0e0; /* Light border */
+}
+
+.order-card:hover {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  transform: translateY(-5px);
+}
+
+.order-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.order-card-header h2 {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #444; /* Muted dark color */
+}
+
+.order-status {
+  font-size: 0.9rem;
+  color: #fff;
+  background-color: #4caf50; /* Green status */
+  padding: 5px 10px;
+  border-radius: 20px;
+}
+
+.order-price {
+  font-size: 1rem;
+  margin-bottom: 15px;
+  color: #888; /* Muted price color */
+}
+
+.view-details-link {
+  text-decoration: none;
+  background-color: #8ac3ff;
+  color: #000000;
+  padding: 8px 15px; /* Smaller button size */
+  border-radius: 5px;
+  display: inline-block;
+  font-weight: bold;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.view-details-link:hover {
+  background-color: #4d8dd1;
+}
+
+.view-details-link:active {
+  transform: translateY(2px); /* Slight button press effect */
+}
+
+/* Mobile and Tablet Responsiveness */
+@media screen and (max-width: 768px) {
+  .order-cards-container {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .order-cards-container {
+    grid-template-columns: 1fr;
+  }
+
+  .page-title {
+    font-size: 1.5rem;
+  }
+}

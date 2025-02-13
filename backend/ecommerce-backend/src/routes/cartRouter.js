@@ -4,9 +4,9 @@ const Controller = require("../controllers/cartController");
 const { verifyToken, isAdmin, isCustomer } = require("../middlewares/auth");
 
 //cart routes
-router.post("/cart", verifyToken, isCustomer, Controller.addToCart);
-router.get("/cart", verifyToken, isCustomer, Controller.getCartItems);
-router.delete("/cart/:id", verifyToken, isCustomer, Controller.deleteCartItem);
+router.post("/cart", verifyToken, Controller.addToCart);
+router.get("/cart", verifyToken, Controller.getCartItems);
+router.delete("/cart/:id", verifyToken, Controller.deleteCartItem);
 
 //wishlist routes
 router.post("/wishlist", verifyToken, isCustomer, Controller.addToWishlist);

@@ -1,0 +1,108 @@
+/* Orders.css */
+
+/* General Styling for the Order Details Page */
+.order-details-container {
+  padding: 20px;
+  max-width: 1000px;
+  margin: 7rem auto;
+  background-color: #d3cafc; /* Muted background color */
+  border-radius: 8px;
+}
+
+.page-title {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 30px;
+  font-weight: bold;
+  color: #333;
+}
+
+.order-details-card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.order-details-card h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.order-details-card p {
+  font-size: 1rem;
+  margin: 10px 0;
+  color: #777;
+}
+
+.order-items {
+  margin-top: 20px;
+}
+
+.order-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 10px;
+  background-color: #f9fafb;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.order-item-image {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-right: 20px;
+}
+
+.order-item-details h4 {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #444;
+}
+
+.order-item-details p {
+  font-size: 0.9rem;
+  color: #777;
+}
+
+.back-to-orders-link {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.back-to-orders-link:hover {
+  background-color: #0056b3;
+}
+
+.back-to-orders-link:active {
+  transform: translateY(2px); /* Slight button press effect */
+}
+
+/* Mobile and Tablet Responsiveness */
+@media screen and (max-width: 768px) {
+  .order-items {
+    display: block;
+  }
+
+  .order-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .order-item-image {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 10px;
+  }
+}

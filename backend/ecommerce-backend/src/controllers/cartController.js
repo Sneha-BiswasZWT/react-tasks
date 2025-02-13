@@ -62,11 +62,11 @@ async function getCartItems(req, res) {
       where: { user_id },
       include: {
         model: Products,
-        attributes: ["name", "price"],
+        attributes: ["name", "price", "image_url"],
       },
     });
     if (cartItems.length === 0) {
-      return res.status(404).json({ message: "Your cart is empty" });
+      return res.status(200).json({ message: "Your cart is empty" });
     }
     return res.status(200).json({ cartItems });
   } catch (error) {

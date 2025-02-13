@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../css/ProductDetails.css";
 
 const ProductDetails = () => {
   const { id } = useParams();
+  const navigate = useNavigate(); // ✅ Now it's inside the component
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -42,6 +43,27 @@ const ProductDetails = () => {
     }
   };
 
+  const addToCart = async () => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      alert("You must be logged in to add items to the cart.");
+      return;
+    }
+
+    try {
+      const res = await axios.post(
+        "http://localhost:5000/api/cart",
+        { product_id: product.id, quantity },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      alert(res.data.message || "Added to cart!");
+    } catch (error) {
+      alert(error.response?.data?.message || "Failed to add item to cart.");
+    }
+  };
+
   if (loading) return <p>Loading product details...</p>;
   if (error) return <p>{error}</p>;
   if (!product) return <p>Product not found.</p>;
@@ -63,7 +85,6 @@ const ProductDetails = () => {
           <p className="stock">
             {product.stock > 0 ? `In Stock: ${product.stock}` : "Out of Stock"}
           </p>
-
           {/* Quantity Selector */}
           <div className="quantity-selector">
             <button onClick={decreaseQuantity} className="quantity-btn">
@@ -74,8 +95,9 @@ const ProductDetails = () => {
               +
             </button>
           </div>
-
-          <button className="add-to-cart">Add to Cart</button>
+          <button className="add-to-cart" onClick={addToCart}>
+            Add to Cart
+          </button>
         </div>
       </div>
     </div>
