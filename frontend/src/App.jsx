@@ -16,6 +16,7 @@ import Wishlists from "./pages/Wishlists";
 import Orders from "./pages/Orders";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import ProductDetails from "./pages/ProductDetails";
 
 const App = () => {
   return (
@@ -29,6 +30,7 @@ const App = () => {
         <Route path="/categories" element={<Categories />} />
         <Route path="/users/profile" element={<Profile />} />
         <Route path="/products" element={<Products />} />
+        <Route path="/products/:id" element={<ProductDetails />} />
         <Route path="/orders" element={<Orders />} />
         <Route path="/wishlists" element={<Wishlists />} />
       </Routes>

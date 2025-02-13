@@ -19,6 +19,6 @@ router.patch(
   imageUploader,
   Controller.updateProduct
 );
-router.delete("/products/:id", verifyToken, Controller.deleteProduct);
+router.delete("/products/:id", isAdmin, verifyToken, Controller.deleteProduct);
 
 module.exports = router;

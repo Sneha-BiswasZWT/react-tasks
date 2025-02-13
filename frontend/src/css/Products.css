@@ -32,6 +32,8 @@ input[type="range"] {
 }
 
 .product-card {
+  text-decoration: none;
+  color: black;
   border: 1px solid #ddd;
   padding: 10px;
   border-radius: 10px;

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import ProductBanner from "../components/ProductBanner";
-import "../css/Products.css"; // Import CSS file
+import "../css/Products.css";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -37,7 +38,7 @@ const Products = () => {
     );
   };
 
-  // Handle Price Slider Change
+  // Handle Price Slider
   const handlePriceChange = (event) => {
     setPriceRange([parseInt(event.target.value), 20000]);
   };
@@ -80,12 +81,15 @@ const Products = () => {
           />
           <p>₹{priceRange[0]} - ₹20000</p>
         </div>
-
         {/* Product Grid */}
         <div className="products-grid">
           {filteredProducts.length > 0 ? (
             filteredProducts.map((product) => (
-              <div key={product.id} className="product-card">
+              <Link
+                to={`/products/${product.id}`}
+                key={product.id}
+                className="product-card"
+              >
                 <img
                   src={`http://localhost:5000/uploads/${
                     product.image_url
@@ -93,13 +97,13 @@ const Products = () => {
                   alt={product.name}
                   onError={(e) => {
                     e.target.onerror = null;
-                    e.target.src = "/logo2.png"; // fallback image
+                    e.target.src = "/logo2.png"; // backup image
                   }}
                   className="product-image"
                 />
                 <h4>{product.name}</h4>
                 <p>Price: ₹{product.price}</p>
-              </div>
+              </Link>
             ))
           ) : (
             <p className="no-products">No products found</p>
