@@ -25,8 +25,10 @@ const Login = () => {
       console.log("Response Data:", res.data); // Debugging
       toast.success(res.data.message);
 
+      localStorage.setItem("token", res.data.token); // 🔥 Store token in localStorage
       setIsAuthenticated(true);
       navigateTo("/");
+
       setEmail("");
       setPassword("");
     } catch (error) {
