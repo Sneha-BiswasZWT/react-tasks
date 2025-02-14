@@ -9,7 +9,13 @@ router.post("/categories", verifyToken, isAdmin, Controller.createCategory);
 router.get("/categories", Controller.getCategories);
 
 //product routes
-router.post("/products", imageUploader, Controller.addProduct);
+router.post(
+  "/products",
+  verifyToken,
+  isAdmin,
+  imageUploader,
+  Controller.addProduct
+);
 router.get("/products", Controller.getProducts);
 router.get("/products/:id", Controller.getProductById);
 router.patch(
