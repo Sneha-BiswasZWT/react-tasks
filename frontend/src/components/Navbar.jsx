@@ -54,7 +54,7 @@ const Navbar = () => {
             <Link to={"/wishlists"} onClick={() => setShow(!show)}>
               Whishlist
             </Link>
-            <Link to={"/profile"} onClick={() => setShow(!show)}>
+            <Link to={"/users/profile"} onClick={() => setShow(!show)}>
               Profile
             </Link>
           </div>
