@@ -84,27 +84,33 @@ const Products = () => {
         {/* Product Grid */}
         <div className="products-grid">
           {filteredProducts.length > 0 ? (
-            filteredProducts.map((product) => (
-              <Link
-                to={`/products/${product.id}`}
-                key={product.id}
-                className="product-card"
-              >
-                <img
-                  src={`http://localhost:5000/uploads/${
+            filteredProducts.map((product) => {
+              const imageUrl = product.image_url
+                ? `http://localhost:5000${
                     product.image_url
-                  }?timestamp=${Date.now()}`}
-                  alt={product.name}
-                  onError={(e) => {
-                    e.target.onerror = null;
-                    e.target.src = "/logo2.png"; // backup image
-                  }}
-                  className="product-image"
-                />
-                <h4>{product.name}</h4>
-                <p>Price: ₹{product.price}</p>
-              </Link>
-            ))
+                  }?t=${new Date().getTime()}`
+                : "/logo2.png";
+
+              return (
+                <Link
+                  to={`/products/${product.id}`}
+                  key={product.id}
+                  className="product-card"
+                >
+                  <img
+                    src={imageUrl}
+                    alt={product.name}
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      e.target.src = "/logo2.png"; // Backup image
+                    }}
+                    className="product-image"
+                  />
+                  <h4>{product.name}</h4>
+                  <p>Price: ₹{product.price}</p>
+                </Link>
+              );
+            })
           ) : (
             <p className="no-products">No products found</p>
           )}

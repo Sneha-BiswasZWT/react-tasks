@@ -19,7 +19,7 @@ const cors = require("cors");
 const corsOptions = {
   origin: "http://localhost:5173", // Ensure this matches frontend URL
   credentials: true, // Allow cookies & credentials
-  methods: ["GET", "POST", "PUT", "DELETE"],
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
   allowedHeaders: ["Content-Type", "Authorization"],
 };
 app.use(cors(corsOptions)); // ✅ Fixed this line

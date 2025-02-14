@@ -86,9 +86,9 @@ const Cart = () => {
           <div key={item.id} className="cart-item">
             <Link to={`/products/${item.product_id}`} className="cart-link">
               <img
-                src={`http://localhost:5000/uploads/${
-                  item.product?.image_url || "default.jpg"
-                }`}
+                src={`http://localhost:5000${
+                  item.product.image_url
+                }?t=${new Date().getTime()}`}
                 alt={item.product?.name || "No name"}
                 className="cart-image"
                 onError={(e) => (e.target.src = "/logo2.png")}
@@ -99,13 +99,6 @@ const Cart = () => {
                 <p>Quantity: {item.quantity}</p>
               </div>
             </Link>
-
-            <button
-              onClick={() => removeFromCart(item.id)}
-              className="remove-btn"
-            >
-              Remove
-            </button>
           </div>
         ))
       )}

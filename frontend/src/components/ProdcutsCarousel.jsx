@@ -11,7 +11,9 @@ const ProductsCarousel = () => {
   // Fetch products from API using Axios
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/products")
+      .get("http://localhost:5000/api/products", {
+        params: { t: Date.now() }, // Ensure fresh data
+      })
       .then((response) => {
         console.log("Fetched Products:", response.data);
         setProducts(response.data.products || []);
@@ -36,7 +38,6 @@ const ProductsCarousel = () => {
   };
 
   if (loading) return <h2>Loading products...</h2>;
-
   if (error) return <h2>Error: {error}</h2>;
 
   return (
@@ -46,31 +47,37 @@ const ProductsCarousel = () => {
         responsive={responsive}
         removeArrowOnDeviceType={["tablet", "mobile"]}
       >
-        {products.map((product, index) => (
-          <div
-            key={index}
-            className="card"
-            style={{ textAlign: "center", padding: "10px" }}
-          >
-            <div className="product-name">{product.name}</div>
-            <img
-              src={`http://localhost:5000/uploads/${
+        {products.map((product) => {
+          const imageUrl = product.image_url
+            ? `http://localhost:5000${
                 product.image_url
-              }?timestamp=${Date.now()}`}
-              alt={product.name}
-              onError={(e) => {
-                e.target.onerror = null;
-                e.target.src = "/logo2.png"; // backup image if broken
-              }}
-              style={{
-                width: "100%",
-                height: "250px",
-                objectFit: "cover",
-                borderRadius: "10px",
-              }}
-            />
-          </div>
-        ))}
+              }?t=${new Date().getTime()}`
+            : "/logo2.png";
+
+          return (
+            <div
+              key={product.id}
+              className="card"
+              style={{ textAlign: "center", padding: "10px" }}
+            >
+              <div className="product-name">{product.name}</div>
+              <img
+                src={imageUrl}
+                alt={product.name}
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = "/logo2.png"; // Fallback image
+                }}
+                style={{
+                  width: "100%",
+                  height: "250px",
+                  objectFit: "cover",
+                  borderRadius: "10px",
+                }}
+              />
+            </div>
+          );
+        })}
       </Carousel>
     </div>
   );

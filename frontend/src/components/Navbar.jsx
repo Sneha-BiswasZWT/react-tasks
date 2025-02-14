@@ -7,7 +7,8 @@ import { Context } from "../main";
 
 const Navbar = () => {
   const [show, setShow] = useState(false);
-  const { isAuthenticated, setIsAuthenticated } = useContext(Context);
+  const { isAuthenticated, setIsAuthenticated, user } = useContext(Context);
+  const navigateTo = useNavigate();
 
   const handleLogout = async () => {
     try {
@@ -26,53 +27,81 @@ const Navbar = () => {
     }
   };
 
-  const navigateTo = useNavigate();
-
   const goToLogin = () => {
     navigateTo("/login");
   };
 
   return (
-    <>
-      <nav className={"container"}>
-        <div className="logo">
-          <Link to={"/"} onClick={() => setShow(!show)}>
-            <img src="/logo1_dark.png" alt="logo" className="logo-img" />
+    <nav className="container">
+      <div className="logo">
+        <Link to="/" onClick={() => setShow(false)}>
+          <img src="/logo1_dark.png" alt="logo" className="logo-img" />
+        </Link>
+      </div>
+
+      <div className={show ? "navLinks showmenu" : "navLinks"}>
+        <div className="links">
+          <Link to="/" onClick={() => setShow(false)}>
+            Home
           </Link>
-        </div>
-        <div className={show ? "navLinks showmenu" : "navLinks"}>
-          <div className="links">
-            <Link to={"/"} onClick={() => setShow(!show)}>
-              Home
-            </Link>
-            <Link to={"/products"} onClick={() => setShow(!show)}>
-              Products
-            </Link>
-            <Link to={"/cart"} onClick={() => setShow(!show)}>
-              Cart
-            </Link>
-            <Link to={"/wishlists"} onClick={() => setShow(!show)}>
-              Whishlist
-            </Link>
-            <Link to={"/users/profile"} onClick={() => setShow(!show)}>
-              Profile
-            </Link>
-          </div>
-          {isAuthenticated ? (
-            <button className="logoutBtn btn" onClick={handleLogout}>
-              LOGOUT
-            </button>
+
+          {/* Regular User Pages */}
+          {!user.role || user.role !== "admin" ? (
+            <>
+              <Link to="/products" onClick={() => setShow(false)}>
+                Products
+              </Link>
+              <Link to="/cart" onClick={() => setShow(false)}>
+                Cart
+              </Link>
+              <Link to="/wishlists" onClick={() => setShow(false)}>
+                Wishlist
+              </Link>
+              <Link to="/users/profile" onClick={() => setShow(false)}>
+                Profile
+              </Link>
+            </>
           ) : (
-            <button className="loginBtn btn" onClick={goToLogin}>
-              LOGIN
-            </button>
+            /* Admin Pages */
+            <>
+              <Link to={"/admin/dashboard"} onClick={() => setShow(!show)}>
+                Dashboard
+              </Link>
+              <Link to="/admin/products" onClick={() => setShow(false)}>
+                Products
+              </Link>
+              <Link to="/admin/users" onClick={() => setShow(false)}>
+                Users
+              </Link>
+              <Link to="/admin/categories" onClick={() => setShow(false)}>
+                Categories
+              </Link>
+              <Link to="/users/profile" onClick={() => setShow(false)}>
+                Profile
+              </Link>
+              <Link to="/admin/orders" onClick={() => setShow(false)}>
+                Orders
+              </Link>
+            </>
           )}
         </div>
-        <div className="hamburger" onClick={() => setShow(!show)}>
-          <GiHamburgerMenu />
-        </div>
-      </nav>
-    </>
+
+        {/* Authentication Buttons */}
+        {isAuthenticated ? (
+          <button className="logoutBtn btn" onClick={handleLogout}>
+            LOGOUT
+          </button>
+        ) : (
+          <button className="loginBtn btn" onClick={goToLogin}>
+            LOGIN
+          </button>
+        )}
+      </div>
+
+      <div className="hamburger" onClick={() => setShow(!show)}>
+        <GiHamburgerMenu />
+      </div>
+    </nav>
   );
 };
 

@@ -61,9 +61,9 @@ const OrderDetails = () => {
             {order.order_items.map((item) => (
               <div className="order-item" key={item.id}>
                 <img
-                  src={`http://localhost:5000/uploads/${
-                    item.product.image_url || "default.jpg"
-                  }`}
+                  src={`http://localhost:5000${
+                    item.product.image_url
+                  }?t=${new Date().getTime()}`}
                   alt={item.product.name}
                   className="order-item-image"
                 />

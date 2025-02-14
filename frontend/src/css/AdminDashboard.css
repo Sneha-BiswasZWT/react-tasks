@@ -1,0 +1,58 @@
+/* Home.css */
+
+/* 🔥 Admin Dashboard Styles */
+.admin-dashboard {
+  text-align: center;
+  width: 80%;
+  border-radius: 2rem;
+  padding: 5rem;
+  margin: 7rem auto;
+  background-color: #c4e7f7;
+  min-height: 100vh;
+}
+
+.admin-dashboard h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  color: #000000;
+}
+
+.admin-sections {
+  display: flex;
+  justify-content: space-between;
+  padding: 3rem;
+  flex-wrap: wrap;
+  margin: 5rem;
+}
+
+.admin-card {
+  background: rgb(203, 165, 238);
+  padding: 5rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-decoration: none;
+  color: #333;
+  font-size: 1.2rem;
+  font-weight: bold;
+  transition: all 0.3s ease-in-out;
+  width: 250px;
+  text-align: center;
+}
+
+.admin-card:hover {
+  background: #007bff;
+  color: white;
+  transform: scale(1.05);
+}
+
+/* 📱 Responsive Design */
+@media (max-width: 768px) {
+  .admin-sections {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .admin-card {
+    width: 80%;
+  }
+}

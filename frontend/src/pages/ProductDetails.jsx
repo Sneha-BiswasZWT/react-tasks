@@ -5,7 +5,7 @@ import "../css/ProductDetails.css";
 
 const ProductDetails = () => {
   const { id } = useParams();
-  const navigate = useNavigate(); // ✅ Now it's inside the component
+  const navigate = useNavigate();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -14,6 +14,7 @@ const ProductDetails = () => {
   useEffect(() => {
     if (!id) {
       setError("Invalid product ID");
+      setLoading(false);
       return;
     }
 
@@ -21,7 +22,11 @@ const ProductDetails = () => {
       .get(`http://localhost:5000/api/products/${id}`)
       .then((res) => {
         console.log("Fetched product:", res.data);
-        setProduct(res.data.product || res.data);
+        if (res.data.product) {
+          setProduct(res.data.product);
+        } else {
+          setProduct(res.data);
+        }
         setLoading(false);
       })
       .catch((error) => {
@@ -32,15 +37,11 @@ const ProductDetails = () => {
   }, [id]);
 
   const increaseQuantity = () => {
-    if (quantity < product.stock) {
-      setQuantity((prev) => prev + 1);
-    }
+    setQuantity((prev) => Math.min(prev + 1, product.stock));
   };
 
   const decreaseQuantity = () => {
-    if (quantity > 1) {
-      setQuantity((prev) => prev - 1);
-    }
+    setQuantity((prev) => Math.max(prev - 1, 1));
   };
 
   const addToCart = async () => {
@@ -68,12 +69,16 @@ const ProductDetails = () => {
   if (error) return <p>{error}</p>;
   if (!product) return <p>Product not found.</p>;
 
+  const imageUrl = product.image_url
+    ? `http://localhost:5000${product.image_url}?t=${Date.now()}`
+    : "/logo2.png";
+
   return (
     <div className="product-details-container">
       <div className="product-details">
         <div className="product-detail-image">
           <img
-            src={`http://localhost:5000/uploads/${product.image_url}`}
+            src={imageUrl}
             alt={product.name}
             onError={(e) => (e.target.src = "/logo2.png")}
           />
@@ -85,6 +90,7 @@ const ProductDetails = () => {
           <p className="stock">
             {product.stock > 0 ? `In Stock: ${product.stock}` : "Out of Stock"}
           </p>
+
           {/* Quantity Selector */}
           <div className="quantity-selector">
             <button onClick={decreaseQuantity} className="quantity-btn">
@@ -95,8 +101,13 @@ const ProductDetails = () => {
               +
             </button>
           </div>
-          <button className="add-to-cart" onClick={addToCart}>
-            Add to Cart
+
+          <button
+            className="add-to-cart"
+            onClick={addToCart}
+            disabled={product.stock <= 0}
+          >
+            {product.stock > 0 ? "Add to Cart" : "Out of Stock"}
           </button>
         </div>
       </div>

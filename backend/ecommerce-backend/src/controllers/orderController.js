@@ -149,6 +149,40 @@ async function orderHistory(req, res) {
   }
 }
 
+//Get all orders
+async function getAllOrders(req, res) {
+  try {
+    const allOrders = await orders.findAll({
+      attributes: ["id", "user_id", "total_price", "status", "created_at"],
+      include: [
+        {
+          model: orderItems,
+          include: [
+            {
+              model: Products, // Include Product details in each order item
+              attributes: ["id", "name", "price", "image_url"],
+            },
+          ],
+          attributes: ["id", "quantity", "price"], // Selecting orderItem fields
+        },
+      ],
+      order: [["created_at", "DESC"]], // Orders sorted by newest first
+    });
+
+    if (!allOrders || allOrders.length === 0) {
+      return res.status(404).json({ message: "No orders found" });
+    }
+
+    return res.status(200).json({ orders: allOrders });
+  } catch (error) {
+    console.error("Error fetching all orders:", error);
+    return res.status(500).json({
+      message: "Error fetching all orders",
+      error: error.message,
+    });
+  }
+}
+
 //Get order details
 async function orderDetails(req, res) {
   const orderId = req.params.id;
@@ -210,4 +244,5 @@ module.exports = {
   orderHistory,
   orderDetails,
   updateOrderStatus,
+  getAllOrders,
 };

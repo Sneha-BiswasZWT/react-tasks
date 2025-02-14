@@ -22,10 +22,16 @@ import Orders from "./pages/Orders";
 import ProductDetails from "./pages/ProductDetails";
 import OrderDetails from "./pages/OrderDetails";
 import AdminProducts from "./pages/AdminProducts";
+import AdminDashboard from "./pages/AdminDashboard";
+import EditProduct from "./pages/EditProduct";
+import CategoriesPage from "./pages/Categories";
+import UsersPage from "./pages/Users";
+import AdminOrders from "./pages/AdminOrders";
 
 //components
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import ProtectedRoute from "./components/ProtectedRoutes";
 
 const App = () => {
   const { user } = useContext(Context);
@@ -45,10 +51,37 @@ const App = () => {
         <Route path="/orders/:id" element={<OrderDetails />} />
         <Route path="/wishlists" element={<Wishlists />} />
 
-        {/* Protected Routes: Only Admins Can Access */}
-        {user.role === "admin" && (
-          <Route path="/admin/products" element={<AdminProducts />} />
-        )}
+        {/* Protected Admin Routes */}
+        <Route
+          path="/admin/dashboard"
+          element={<ProtectedRoute element={<AdminDashboard />} />}
+        />
+
+        <Route
+          path="/admin/products"
+          element={<ProtectedRoute element={<AdminProducts />} />}
+        />
+        <Route
+          path="/admin/products/:id"
+          element={<ProtectedRoute element={<EditProduct />} />}
+        />
+
+        <Route
+          path="/admin/products/:id"
+          element={<ProtectedRoute element={<EditProduct />} />}
+        />
+        <Route
+          path="/admin/categories"
+          element={<ProtectedRoute element={<CategoriesPage />} />}
+        />
+        <Route
+          path="/admin/users"
+          element={<ProtectedRoute element={<UsersPage />} />}
+        />
+        <Route
+          path="/admin/orders"
+          element={<ProtectedRoute element={<AdminOrders />} />}
+        />
       </Routes>
       <ToastContainer position="top-center" />
       <Footer />
