@@ -61,10 +61,10 @@ const AdminOrders = () => {
               <strong>Order ID:</strong> {order.id}
             </div>
             <div>
-              <strong>Customer:</strong> {order.user?.name || "Unknown"}
+              <strong>Customer:</strong> {order.user_id || "Unknown"}
             </div>
             <div>
-              <strong>Total:</strong> ₹{order.total}
+              <strong>Total:</strong> ₹{order.total_price}
             </div>
             <div>
               <strong>Status:</strong>
@@ -72,11 +72,11 @@ const AdminOrders = () => {
                 value={order.status}
                 onChange={(e) => handleStatusChange(order.id, e.target.value)}
               >
-                <option value="Pending">Pending</option>
-                <option value="Processing">Processing</option>
-                <option value="Shipped">Shipped</option>
-                <option value="Delivered">Delivered</option>
-                <option value="Cancelled">Cancelled</option>
+                <option value="pending">Pending</option>
+                <option value="processing">Processing</option>
+                <option value="shipped">Shipped</option>
+                <option value="delivered">Delivered</option>
+                <option value="canceled">Cancelled</option>
               </select>
             </div>
           </li>

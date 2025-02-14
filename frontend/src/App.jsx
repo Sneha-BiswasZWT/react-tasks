@@ -27,6 +27,7 @@ import EditProduct from "./pages/EditProduct";
 import CategoriesPage from "./pages/Categories";
 import UsersPage from "./pages/Users";
 import AdminOrders from "./pages/AdminOrders";
+import AddProduct from "./pages/AddProduct";
 
 //components
 import Navbar from "./components/Navbar";
@@ -49,7 +50,7 @@ const App = () => {
         <Route path="/products/:id" element={<ProductDetails />} />
         <Route path="/orders" element={<Orders />} />
         <Route path="/orders/:id" element={<OrderDetails />} />
-        <Route path="/wishlists" element={<Wishlists />} />
+        <Route path="/wishlist" element={<Wishlists />} />
 
         {/* Protected Admin Routes */}
         <Route
@@ -81,6 +82,10 @@ const App = () => {
         <Route
           path="/admin/orders"
           element={<ProtectedRoute element={<AdminOrders />} />}
+        />
+        <Route
+          path="/admin/products/add"
+          element={<ProtectedRoute element={<AddProduct />} />}
         />
       </Routes>
       <ToastContainer position="top-center" />

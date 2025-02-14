@@ -54,7 +54,7 @@ const Navbar = () => {
               <Link to="/cart" onClick={() => setShow(false)}>
                 Cart
               </Link>
-              <Link to="/wishlists" onClick={() => setShow(false)}>
+              <Link to="/wishlist" onClick={() => setShow(false)}>
                 Wishlist
               </Link>
               <Link to="/users/profile" onClick={() => setShow(false)}>
@@ -64,7 +64,7 @@ const Navbar = () => {
           ) : (
             /* Admin Pages */
             <>
-              <Link to={"/admin/dashboard"} onClick={() => setShow(!show)}>
+              <Link to={"/admin/dashboard"} onClick={() => setShow(false)}>
                 Dashboard
               </Link>
               <Link to="/admin/products" onClick={() => setShow(false)}>

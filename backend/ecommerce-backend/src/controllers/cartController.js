@@ -150,7 +150,7 @@ async function getWishlistItems(req, res) {
       },
     });
     if (wishlistItems.length === 0) {
-      return res.status(404).json({ message: "Your Wishlist is empty" });
+      return res.status(200).json({});
     }
     return res.status(200).json({ wishlistItems });
   } catch (error) {

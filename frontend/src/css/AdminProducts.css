@@ -49,7 +49,7 @@
 }
 
 .category-page-btn {
-  margin-top: 10px;
+  margin-block: 1rem;
   padding: 12px;
   width: 100%;
   background-color: #007bff;
@@ -113,63 +113,4 @@
   .filters {
     width: 100%;
   }
-}
-.add-product-section {
-  max-width: 600px;
-  margin: 40px auto;
-  padding: 20px;
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-.add-product-section h2 {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.add-product-section form {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-.add-product-section input,
-.add-product-section textarea,
-.add-product-section select {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 16px;
-}
-
-.add-product-section textarea {
-  resize: vertical;
-  min-height: 80px;
-}
-
-.add-product-section input[type="file"] {
-  border: none;
-}
-
-.add-product-section button {
-  background: #007bff;
-  color: white;
-  padding: 12px;
-  font-size: 18px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-.add-product-section button:hover {
-  background: #0056b3;
-}
-
-.success-message {
-  color: #28a745;
-  text-align: center;
-  font-size: 16px;
 }

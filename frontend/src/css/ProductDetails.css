@@ -190,3 +190,25 @@
     padding: 10px 15px;
   }
 }
+
+.add-to-wishlist {
+  background-color: #ff6bd3;
+  color: white;
+  padding: 12px 20px;
+  font-size: 1.2rem;
+  margin: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.add-to-wishlist:hover {
+  background: #e63946;
+}
+
+.wishlist-message {
+  margin-top: 10px;
+  color: green;
+  font-weight: bold;
+}

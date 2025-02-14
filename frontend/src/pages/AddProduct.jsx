@@ -1,26 +1,34 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import "../css/AddProduct.css"; // Add styles for better UI
+import axios from "axios";
+import { Context } from "../main";
+import "../css/AddProducts.css";
 
 const AddProduct = () => {
+  const { isAuthenticated, user } = useContext(Context);
+  const navigate = useNavigate();
+  const [categories, setCategories] = useState([]);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
   const [stock, setStock] = useState("");
   const [category, setCategory] = useState("");
   const [image, setImage] = useState(null);
-  const [categories, setCategories] = useState([]);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
-  const navigate = useNavigate();
 
   useEffect(() => {
+    if (!isAuthenticated || user.role !== "admin") {
+      navigate("/products");
+      return;
+    }
+
+    // Fetch categories
     axios
       .get("http://localhost:5000/api/categories")
       .then((res) => setCategories(res.data.categories || []))
-      .catch((err) => console.error("Error fetching categories:", err));
-  }, []);
+      .catch(() => setError("Failed to fetch categories"));
+  }, [isAuthenticated, user, navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -52,8 +60,9 @@ const AddProduct = () => {
           },
         }
       );
+
       setSuccess(res.data.message);
-      setTimeout(() => navigate("/products"), 2000);
+      setTimeout(() => navigate("/admin/products"), 2000); // Redirect after success
     } catch (err) {
       setError(err.response?.data?.message || "Failed to add product.");
     }
@@ -62,32 +71,32 @@ const AddProduct = () => {
   return (
     <div className="add-product-container">
       <h2>Add New Product</h2>
-      {error && <p className="error-message">{error}</p>}
       {success && <p className="success-message">{success}</p>}
-      <form onSubmit={handleSubmit}>
+      {error && <p className="error-message">{error}</p>}
+      <form onSubmit={handleSubmit} className="add-product-form">
         <input
           type="text"
-          placeholder="Name"
+          placeholder="Product Name"
           value={name}
           onChange={(e) => setName(e.target.value)}
           required
         />
         <textarea
-          placeholder="Description"
+          placeholder="Product Description"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           required
         />
         <input
           type="number"
-          placeholder="Price"
+          placeholder="Price (₹)"
           value={price}
           onChange={(e) => setPrice(e.target.value)}
           required
         />
         <input
           type="number"
-          placeholder="Stock"
+          placeholder="Stock Quantity"
           value={stock}
           onChange={(e) => setStock(e.target.value)}
           required
@@ -110,7 +119,9 @@ const AddProduct = () => {
           onChange={(e) => setImage(e.target.files[0])}
           required
         />
-        <button type="submit">Add Product</button>
+        <button type="submit" className="add-product-btn">
+          Add Product
+        </button>
       </form>
     </div>
   );

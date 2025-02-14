@@ -10,6 +10,7 @@ const ProductDetails = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [quantity, setQuantity] = useState(1);
+  const [wishlistMessage, setWishlistMessage] = useState("");
 
   useEffect(() => {
     if (!id) {
@@ -65,6 +66,28 @@ const ProductDetails = () => {
     }
   };
 
+  const addToWishlist = async () => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      alert("You must be logged in to add items to the wishlist.");
+      return;
+    }
+
+    try {
+      const res = await axios.post(
+        "http://localhost:5000/api/wishlist",
+        { product_id: product.id },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      setWishlistMessage(res.data.message || "Added to wishlist!");
+      setTimeout(() => setWishlistMessage(""), 3000);
+    } catch (error) {
+      alert(error.response?.data?.message || "Failed to add item to wishlist.");
+    }
+  };
+
   if (loading) return <p>Loading product details...</p>;
   if (error) return <p>{error}</p>;
   if (!product) return <p>Product not found.</p>;
@@ -109,6 +132,15 @@ const ProductDetails = () => {
           >
             {product.stock > 0 ? "Add to Cart" : "Out of Stock"}
           </button>
+
+          {/* Add to Wishlist Button */}
+          <button className="add-to-wishlist" onClick={addToWishlist}>
+            Add to Wishlist
+          </button>
+
+          {wishlistMessage && (
+            <p className="wishlist-message">{wishlistMessage}</p>
+          )}
         </div>
       </div>
     </div>

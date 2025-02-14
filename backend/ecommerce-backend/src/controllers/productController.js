@@ -46,7 +46,7 @@ async function getCategories(req, res) {
   try {
     // Pagination
     const page = parseInt(req.query.page) || 1;
-    const limit = parseInt(req.query.limit) || 10;
+    const limit = parseInt(req.query.limit) || 1000;
     const offset = (page - 1) * limit;
 
     const { count, rows } = await categories.findAndCountAll({
@@ -153,7 +153,7 @@ async function getProducts(req, res) {
   try {
     // Pagination
     const page = parseInt(req.query.page) || 1;
-    const limit = parseInt(req.query.limit) || 10;
+    const limit = parseInt(req.query.limit) || 1000;
     const offset = (page - 1) * limit;
 
     // Filters from query params
