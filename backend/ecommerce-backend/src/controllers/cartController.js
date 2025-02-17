@@ -146,7 +146,7 @@ async function getWishlistItems(req, res) {
       where: { user_id },
       include: {
         model: Products,
-        attributes: ["name", "price"],
+        attributes: ["name", "price", "image_url"],
       },
     });
     if (wishlistItems.length === 0) {
@@ -166,9 +166,9 @@ async function getWishlistItems(req, res) {
 async function deleteWishlistItem(req, res) {
   try {
     const user_id = req.user.id;
-    const product_id = req.params.id;
+    const id = req.params.id;
     const wishlistItem = await wishlists.findOne({
-      where: { user_id, product_id },
+      where: { user_id, id },
     });
     if (!wishlistItem) {
       return res.status(404).json({ message: "Product not found in wishlist" });

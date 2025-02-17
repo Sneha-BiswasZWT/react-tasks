@@ -1,5 +1,5 @@
 .wishlist-container {
-  max-width: 900px;
+  max-width: 800px;
   margin: 7rem auto;
   padding: 20px;
   background: #fff;
@@ -8,75 +8,70 @@
   text-align: center;
 }
 
-h2 {
-  font-size: 2rem;
-  color: #333;
-  margin-bottom: 20px;
-}
-
-.empty-message {
-  font-size: 1.2rem;
-  color: #777;
-}
-
 .wishlist-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 20px;
-  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
 .wishlist-card {
-  background: #f9f9f9;
-  border-radius: 10px;
-  overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.wishlist-card:hover {
-  transform: scale(1.05);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px;
+  border-bottom: 1px solid #ddd;
+  transition: transform 0.3s ease;
 }
 
 .wishlist-link {
+  display: flex;
+  align-items: center;
+  flex: 1;
   text-decoration: none;
   color: inherit;
-  display: block;
-  padding: 10px;
+  transition: background 0.2s ease;
+}
+
+.wishlist-card:hover {
+  background: rgba(0, 0, 0, 0.03);
 }
 
 .wishlist-image {
-  width: 100%;
-  height: 200px;
+  width: 120px;
+  height: 120px;
+  border-radius: 8px;
   object-fit: cover;
-  border-bottom: 2px solid #ddd;
+  transition: transform 0.3s ease;
 }
 
 .wishlist-details {
-  padding: 15px;
+  padding-left: 20px;
+  text-align: left;
+  flex: 1;
 }
 
-.wishlist-details h4 {
-  font-size: 1.2rem;
-  margin: 10px 0;
+.add-to-cart-btn,
+.remove-btn {
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: 0.3s;
+  margin-inline: 2px;
 }
 
-.wishlist-details p {
-  font-size: 1.1rem;
-  color: #6c5ce7;
-  font-weight: bold;
+.add-to-cart-btn {
+  background-color: #6c5ce7;
+  color: white;
+}
+
+.add-to-cart-btn:hover {
+  background-color: #4b4bd6;
 }
 
 .remove-btn {
   background-color: #ff6b6b;
   color: white;
-  border: none;
-  padding: 8px 12px;
-  cursor: pointer;
-  border-radius: 5px;
-  margin: 10px;
-  transition: background 0.3s ease;
 }
 
 .remove-btn:hover {

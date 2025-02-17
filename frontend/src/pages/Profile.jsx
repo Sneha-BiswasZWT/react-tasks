@@ -118,9 +118,11 @@ const UserProfile = () => {
         ))}
       </div>
 
-      <div className="order-history-link">
-        <Link to="/orders">View Order History</Link>
-      </div>
+      {user?.role !== "admin" && (
+        <div className="order-history-link">
+          <Link to="/orders">View Order History</Link>
+        </div>
+      )}
     </div>
   );
 };
