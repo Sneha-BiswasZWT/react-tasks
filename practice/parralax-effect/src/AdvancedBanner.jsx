@@ -8,8 +8,7 @@ export const AdvancedBannerTop = () => {
         {
           image: "/bg-teal.png",
           translateY: [0, 30],
-          opacity: [1, 0.7],
-          scale: [1.05, 1],
+
           shouldAlwaysCompleteAnimation: true,
         },
         {
@@ -22,35 +21,35 @@ export const AdvancedBannerTop = () => {
           image: "/circle4.png",
           translateY: [5, 30],
           opacity: [1, 0.5],
-          scale: [0.6, 1],
+          scale: [0.6, 0.8],
           shouldAlwaysCompleteAnimation: true,
         },
         {
           image: "/circle3.png",
           translateY: [5, 30],
           opacity: [1, 0.5],
-          scale: [0.6, 1],
+          scale: [0.6, 0.7],
           shouldAlwaysCompleteAnimation: true,
         },
         {
           image: "/circle2.png",
           translateY: [5, 30],
           opacity: [1, 0.5],
-          scale: [0.6, 1],
+          scale: [0.6, 0.4],
           shouldAlwaysCompleteAnimation: true,
         },
         {
           image: "/circle1.png",
           translateY: [5, 30],
           opacity: [1, 0.5],
-          scale: [0.6, 1],
+          scale: [0.6, 0.2],
           shouldAlwaysCompleteAnimation: true,
         },
         {
           image: "/breathe.png",
-          translateY: [10, 40],
-          opacity: [1, 0.6],
-          scale: [0.95, 1.05, "easeInOutSine"],
+          translateY: [7, 40],
+
+          scale: [0.6, 0.6, "easeInOutSine"],
           shouldAlwaysCompleteAnimation: true,
         },
 
